@@ -113,45 +113,48 @@
 <body class="selection:bg-amberfire-500 selection:text-white">
 
   <!-- 1. NAVIGATION HEADER -->
-  <header class="sticky top-0 z-40 bg-timber-950/90 backdrop-blur-md border-b border-timber-800 transition-all">
+  <header class="sticky top-0 z-40 bg-[#090B0E]/95 backdrop-blur-xl border-b border-white/[0.08] transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
+      <div class="flex items-center justify-between h-20 gap-4">
         
-        <a href="#" class="flex items-center gap-3 group">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amberfire-500 to-amberfire-600 flex items-center justify-center text-white shadow-glow-warm group-hover:scale-105 transition-transform">
-            <i data-lucide="flame" class="w-6 h-6"></i>
+        <!-- Логотип -->
+        <a href="#" class="flex items-center gap-3 group flex-shrink-0">
+          <div class="w-10 h-10 rounded-xl bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 flex items-center justify-center group-hover:border-amberfire-500/60 group-hover:scale-105 transition-all">
+            <i data-lucide="flame" class="w-5 h-5 stroke-[2.5]"></i>
           </div>
           <div>
-            <span class="font-display font-extrabold text-lg sm:text-xl text-white tracking-tight block leading-tight">
+            <span class="font-display font-black text-base sm:text-lg text-white tracking-tight block leading-tight uppercase">
               Банный двор
             </span>
-            <span class="text-[11px] text-amberfire-400 font-semibold uppercase tracking-wider block">
-              Баня на дровах • Чан • Бассейны • Азов
+            <span class="text-[10px] text-timber-400 font-bold uppercase tracking-wider block mt-0.5">
+              Комплекс отдыха · Азов
             </span>
           </div>
         </a>
 
-        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-timber-300">
-          <a href="#banyas" class="hover:text-amberfire-400 transition-colors">Парные и чаны</a>
-          <a href="#rituals" class="hover:text-amberfire-400 transition-colors">Банные ритуалы</a>
-          <a href="#amenities" class="hover:text-amberfire-400 transition-colors">Бассейны и беседки</a>
-          <a href="#quiz" class="hover:text-amberfire-400 transition-colors">Расчет отдыха</a>
-          <a href="#reviews" class="hover:text-amberfire-400 transition-colors">Отзывы 5.0</a>
-          <a href="#contacts" class="hover:text-amberfire-400 transition-colors">Контакты</a>
+        <!-- Навигация: 1 строка, без переносов, чистый трекинг -->
+        <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold uppercase tracking-wider text-timber-300">
+          <a href="#banyas" class="hover:text-amberfire-400 transition-colors whitespace-nowrap">Парные</a>
+          <a href="#scenarios" class="hover:text-amberfire-400 transition-colors whitespace-nowrap">Форматы</a>
+          <a href="#rituals" class="hover:text-amberfire-400 transition-colors whitespace-nowrap">Ритуалы</a>
+          <a href="#amenities" class="hover:text-amberfire-400 transition-colors whitespace-nowrap">Бассейны</a>
+          <a href="#reviews" class="hover:text-amberfire-400 transition-colors whitespace-nowrap">Отзывы 5.0</a>
+          <a href="#contacts" class="hover:text-amberfire-400 transition-colors whitespace-nowrap">Контакты</a>
         </nav>
 
-        <div class="flex items-center gap-4">
-          <div class="hidden sm:flex flex-col text-right">
-            <a href="tel:+79287662667" class="text-sm font-bold text-white hover:text-amberfire-400 transition-colors">
+        <!-- Контакты и CTA: строго в одну строку без разрывов -->
+        <div class="flex items-center gap-3 sm:gap-5 flex-shrink-0">
+          <div class="hidden sm:flex flex-col text-right whitespace-nowrap">
+            <a href="tel:+79287662667" class="text-sm font-display font-bold text-white hover:text-amberfire-400 transition-colors whitespace-nowrap tracking-tight">
               +7 (928) 766-26-67
             </a>
-            <span class="text-[11px] text-emerald-400 flex items-center justify-end gap-1 font-medium">
+            <span class="text-[11px] text-emerald-400 flex items-center justify-end gap-1.5 font-medium whitespace-nowrap mt-0.5">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Работаем круглосуточно 24/7
+              <span>Круглосуточно 24/7</span>
             </span>
           </div>
 
-          <button onclick="openBookingModal('Любая парная')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amberfire-500 to-amberfire-600 text-white font-bold text-xs sm:text-sm shadow-glow-warm hover:brightness-110 active:scale-95 transition-all">
+          <button onclick="openBookingModal('Бронирование')" class="px-5 py-2.5 rounded-xl bg-amberfire-500 hover:bg-amberfire-400 text-timber-950 font-display font-black text-xs uppercase tracking-wider whitespace-nowrap shadow-md shadow-amberfire-500/15 hover:shadow-amberfire-500/25 active:scale-95 transition-all">
             Забронировать
           </button>
         </div>

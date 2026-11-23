@@ -1735,8 +1735,8 @@
             maxZoom: 19
           }).addTo(map);
 
-          // Кастомный маркер огня банного комплекса
-          const iconHtml = '<div style="background-color:#D97706;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(217,119,6,0.6);border:3px solid #1A1512;color:white;font-size:18px;">🔥</div>';
+          // Кастомный маркер огня банного комплекса (чистый SVG Lucide Flame без эмодзи)
+          const iconHtml = '<div style="background-color:#D97706;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(217,119,6,0.6);border:3px solid #1A1512;"><svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"22\\" height=\\"22\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"white\\" stroke-width=\\"2.5\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"><path d=\\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\\"/></svg></div>';
           const customIcon = L.divIcon({
             html: iconHtml,
             className: '',

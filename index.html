@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Банный комплекс «Банный двор» в Азове | Русская баня на дровах, чан, бассейны | 5.0 ★ (1 713 отзывов)</title>
+  <meta name="description" content="Традиционная русская баня на березовых дровах, сибирский банный чан под звездами, теплые бассейны и беседки с мангалом в Азове. Бронирование круглосуточно: +7 (928) 766-26-67." />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Банный комплекс «Банный двор» в Азове | Русская баня на дровах и сибирский чан" />
+  <meta property="og:description" content="Настоящий пар на дровах, сибирский чан с хвоей, закрытые дворики с мангалами и бассейны. Рейтинг 5.0 ★ на Яндекс Картах. Подарок при бронировании онлайн!" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop" />
+  <meta property="og:url" content="https://zeytankza.github.io/banya/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Manrope', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            timber: {
+              950: '#120F0D',
+              900: '#1A1512',
+              850: '#231D18',
+              800: '#2E2620',
+              700: '#3D332B',
+              600: '#54463B',
+              500: '#756353',
+              400: '#A38D7A',
+              300: '#C7B4A3',
+              200: '#E4D8CE',
+              100: '#F2ECE6',
+              50: '#FAF7F4',
+            },
+            amberfire: {
+              500: '#D97706',
+              600: '#B45309',
+              400: '#F59E0B',
+              300: '#FCD34D',
+            }
+          },
+          boxShadow: {
+            'glow-warm': '0 0 25px -5px rgba(217, 119, 6, 0.25)',
+            'card': '0 8px 30px rgba(0, 0, 0, 0.35)',
+            'elevated': '0 16px 45px -10px rgba(0, 0, 0, 0.5)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <style>
+    body {
+      background-color: #120F0D;
+      color: #F2ECE6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .leaflet-control-attribution, .leaflet-attribution-flag {
+      display: none !important;
+      visibility: hidden !important;
+    }
+    #banya-map {
+      height: 100%;
+      min-height: 420px;
+      width: 100%;
+      background: #1A1512;
+    }
+    .leaflet-popup-content-wrapper {
+      background: #1A1512 !important;
+      color: #F2ECE6 !important;
+      border: 1px solid #3D332B !important;
+      border-radius: 14px !important;
+      padding: 6px !important;
+      box-shadow: 0 14px 35px -8px rgba(0,0,0,0.6) !important;
+    }
+    .leaflet-popup-tip {
+      background: #1A1512 !important;
+    }
+    .leaflet-container {
+      font-family: inherit !important;
+    }
+  </style>
+</head>
+<body class="selection:bg-amberfire-500 selection:text-white">
+
+  <!-- 1. NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-timber-950/90 backdrop-blur-md border-b border-timber-800 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amberfire-500 to-amberfire-600 flex items-center justify-center text-white shadow-glow-warm group-hover:scale-105 transition-transform">
+            <i data-lucide="flame" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="font-display font-extrabold text-lg sm:text-xl text-white tracking-tight block leading-tight">
+              Банный двор
+            </span>
+            <span class="text-[11px] text-amberfire-400 font-semibold uppercase tracking-wider block">
+              Баня на дровах • Чан • Бассейны • Азов
+            </span>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-timber-300">
+          <a href="#banyas" class="hover:text-amberfire-400 transition-colors">Парные и чаны</a>
+          <a href="#rituals" class="hover:text-amberfire-400 transition-colors">Банные ритуалы</a>
+          <a href="#amenities" class="hover:text-amberfire-400 transition-colors">Бассейны и беседки</a>
+          <a href="#quiz" class="hover:text-amberfire-400 transition-colors">Расчет отдыха</a>
+          <a href="#reviews" class="hover:text-amberfire-400 transition-colors">Отзывы 5.0</a>
+          <a href="#contacts" class="hover:text-amberfire-400 transition-colors">Контакты</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <div class="hidden sm:flex flex-col text-right">
+            <a href="tel:+79287662667" class="text-sm font-bold text-white hover:text-amberfire-400 transition-colors">
+              +7 (928) 766-26-67
+            </a>
+            <span class="text-[11px] text-emerald-400 flex items-center justify-end gap-1 font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Работаем круглосуточно 24/7
+            </span>
+          </div>
+
+          <button onclick="openBookingModal('Любая парная')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amberfire-500 to-amberfire-600 text-white font-bold text-xs sm:text-sm shadow-glow-warm hover:brightness-110 active:scale-95 transition-all">
+            Забронировать
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. HERO SECTION -->
+    <section class="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden bg-gradient-to-b from-timber-950 via-timber-900 to-timber-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-timber-800 border border-timber-700 text-amberfire-400 text-xs font-bold mb-6">
+              <i data-lucide="award" class="w-4 h-4 text-amberfire-400"></i>
+              <span>Рейтинг 5.0 ★ на Яндекс Картах (1 713 отзывов гостей)</span>
+            </div>
+
+            <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.12] mb-6">
+              Настоящая русская баня на дровах и сибирский чан под открытым небом
+            </h1>
+
+            <p class="text-base sm:text-lg text-timber-300 leading-relaxed mb-8 max-w-2xl">
+              Закрытая приватная территория в Азове без посторонних глаз: чугунные печи с мягким мелкодисперсным паром, ледяная купель, теплые бассейны с шезлонгами и просторные беседки с мангалом для шашлыка.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-9">
+              <div class="p-3.5 bg-timber-900/90 rounded-2xl border border-timber-800 shadow-sm">
+                <div class="text-xs text-timber-400 font-medium mb-1">Пар на дровах</div>
+                <div class="text-sm font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+                  <span>Береза и жадеит</span>
+                </div>
+              </div>
+              <div class="p-3.5 bg-timber-900/90 rounded-2xl border border-timber-800 shadow-sm">
+                <div class="text-xs text-timber-400 font-medium mb-1">Сибирский чан</div>
+                <div class="text-sm font-bold text-white flex items-center gap-1.5">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-amberfire-400"></i>
+                  <span>Пихта и травы</span>
+                </div>
+              </div>
+              <div class="p-3.5 bg-timber-900/90 rounded-2xl border border-timber-800 shadow-sm col-span-2 sm:col-span-1">
+                <div class="text-xs text-timber-400 font-medium mb-1">Беседки с мангалом</div>
+                <div class="text-sm font-bold text-amberfire-400 flex items-center gap-1.5">
+                  <i data-lucide="utensils" class="w-4 h-4"></i>
+                  <span>Своя еда и шашлык</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <a href="#quiz" class="px-7 py-4 rounded-xl bg-gradient-to-r from-amberfire-500 to-amberfire-600 text-white font-bold text-sm sm:text-base shadow-glow-warm hover:brightness-110 transition-all flex items-center justify-center gap-2 group active:scale-95 text-center">
+                <span>Рассчитать стоимость отдыха</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+              </a>
+              <a href="#banyas" class="px-6 py-4 rounded-xl bg-timber-850 border border-timber-700 text-timber-200 font-bold text-sm sm:text-base hover:bg-timber-800 hover:text-white transition-colors text-center flex items-center justify-center gap-2">
+                <i data-lucide="eye" class="w-4 h-4 text-amberfire-400"></i>
+                <span>Смотреть парные и цены</span>
+              </a>
+            </div>
+
+            <div class="mt-6 flex items-center gap-3 text-xs text-timber-400">
+              <div class="flex -space-x-1.5 overflow-hidden">
+                <span class="inline-block w-6 h-6 rounded-full bg-amberfire-600 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-timber-950">МД</span>
+                <span class="inline-block w-6 h-6 rounded-full bg-timber-700 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-timber-950">АВ</span>
+                <span class="inline-block w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-timber-950">СЕ</span>
+              </div>
+              <span>Более <strong>1 700 довольных компаний и семей</strong> отдохнули у нас в 2026 году</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 relative">
+            <div class="relative rounded-3xl overflow-hidden border border-timber-700 shadow-elevated bg-timber-900 aspect-[4/3] sm:aspect-[5/4]">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1000&auto=format&fit=crop" alt="Банный комплекс Банный двор в Азове" class="w-full h-full object-cover" loading="eager" />
+              <div class="absolute inset-0 bg-gradient-to-t from-timber-950/80 via-transparent to-transparent"></div>
+              
+              <div class="absolute top-4 left-4 p-3 rounded-2xl bg-timber-950/90 backdrop-blur-md shadow-card border border-timber-700 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amberfire-500 text-timber-950 flex items-center justify-center font-display font-black text-base shadow-sm">
+                  5.0
+                </div>
+                <div>
+                  <div class="text-white text-xs font-bold flex items-center gap-1">
+                    <span>1 713 отзывов</span>
+                    <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                  </div>
+                  <div class="text-timber-400 text-[11px]">Высший рейтинг на Яндекс Картах</div>
+                </div>
+              </div>
+
+              <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-timber-950/90 backdrop-blur-md border border-timber-700 flex items-center justify-between">
+                <div>
+                  <div class="text-xs font-bold text-white">г. Азов, ул. Дружбы, 19В</div>
+                  <div class="text-[11px] text-timber-400">Закрытая охраняемая парковка</div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold uppercase">
+                  Открыто 24/7
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: СЦЕНАРИИ ОТДЫХА -->
+    <section id="scenarios" class="py-16 sm:py-24 border-b border-timber-800/80 bg-timber-900/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+              Форматы отдыха
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
+              Для кого создан «Банный двор»
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-timber-300 max-w-2xl">
+              Индивидуальное пространство без посторонних глаз: закрытая территория, персональная парковка и чистейший пар.
+            </p>
+          </div>
+          
+          <!-- Кнопки навигации карусели (Десктоп) -->
+          <div class="hidden sm:flex items-center gap-2">
+            <button onclick="scrollCarousel('scenarios-carousel', -1)" class="w-11 h-11 rounded-xl bg-timber-800 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-750 hover:border-amberfire-500/50 flex items-center justify-center transition-all shadow-sm" aria-label="Предыдущий сценарий">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button onclick="scrollCarousel('scenarios-carousel', 1)" class="w-11 h-11 rounded-xl bg-timber-800 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-750 hover:border-amberfire-500/50 flex items-center justify-center transition-all shadow-sm" aria-label="Следующий сценарий">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Подсказка на мобилках -->
+        <div class="sm:hidden flex items-center justify-between text-xs text-timber-400 mb-3 px-1">
+          <span>Листайте карточки</span>
+          <span class="text-amberfire-400 flex items-center gap-1 font-medium">Влево-вправо <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </div>
+
+        <!-- Карусель сценариев -->
+        <div id="scenarios-carousel" class="flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+          
+          <!-- Карточка 1 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[340px] rounded-2xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-5">
+                <i data-lucide="users" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Семьи с детьми</h3>
+              <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                Мягкий температурный режим (60–75°C), теплый безопасный бассейн, закрытый внутренний двор без сквозняков и посторонних.
+              </p>
+            </div>
+            <ul class="text-xs text-timber-400 space-y-2 border-t border-timber-800 pt-4">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Детские спасательные жилеты</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Травяной пар без резких эфиров</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Карточка 2 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[340px] rounded-2xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-5">
+                <i data-lucide="flame" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Дружеские компании</h3>
+              <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                Просторная гостиная с дубовым столом на 10–12 человек, Smart TV, кирпичный мангал для шашлыка и жаркий пар до 110°C.
+              </p>
+            </div>
+            <ul class="text-xs text-timber-400 space-y-2 border-t border-timber-800 pt-4">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Мангальная зона с решетками и шампурами</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Обливные ведра и купель</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Карточка 3 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[340px] rounded-2xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-5">
+                <i data-lucide="heart" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Романтический вечер</h3>
+              <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                Сибирский чан с пихтой и цитрусами под открытым небом, приглушенный теплый свет, чай на травах и полная приватность.
+              </p>
+            </div>
+            <ul class="text-xs text-timber-400 space-y-2 border-t border-timber-800 pt-4">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Подсветка чана и двора</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Самовар с алтайским медом</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Карточка 4 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[340px] rounded-2xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-5">
+                <i data-lucide="briefcase" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Корпоративы и праздники</h3>
+              <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                Аренда комплекса целиком: баня, чан, беседка, бассейн и номера отдыха. Возможность безналичного расчета для организаций.
+              </p>
+            </div>
+            <ul class="text-xs text-timber-400 space-y-2 border-t border-timber-800 pt-4">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Договор и закрывающие документы</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+                <span>Вместимость до 15 человек</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 4: КАТАЛОГ ПАРНЫХ И ЧАНОВ -->
+    <section id="banyas" class="py-16 sm:py-24 border-b border-timber-800/80 bg-timber-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+              Наш комплекс
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
+              Парные на дровах и сибирские чаны
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-timber-300 max-w-2xl">
+              Каждая парная топится исключительно отборной сухой березой. Температура и влажность регулируются под ваши пожелания.
+            </p>
+          </div>
+
+          <!-- Табы фильтрации и стрелки -->
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="inline-flex p-1 rounded-xl bg-timber-900 border border-timber-800">
+              <button onclick="filterBanya('all', this)" class="banya-filter-btn active-tab px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-white bg-amberfire-600 transition-colors">Все</button>
+              <button onclick="filterBanya('steam', this)" class="banya-filter-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-timber-400 hover:text-white transition-colors">Бани</button>
+              <button onclick="filterBanya('vat', this)" class="banya-filter-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-timber-400 hover:text-white transition-colors">Чаны</button>
+            </div>
+
+            <div class="hidden sm:flex items-center gap-2">
+              <button onclick="scrollCarousel('banyas-carousel', -1)" class="w-11 h-11 rounded-xl bg-timber-850 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-800 flex items-center justify-center transition-colors shadow-sm" aria-label="Назад">
+                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+              </button>
+              <button onclick="scrollCarousel('banyas-carousel', 1)" class="w-11 h-11 rounded-xl bg-timber-850 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-800 flex items-center justify-center transition-colors shadow-sm" aria-label="Вперед">
+                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Подсказка на мобилках -->
+        <div class="sm:hidden flex items-center justify-between text-xs text-timber-400 mb-3 px-1">
+          <span>Листайте варианты</span>
+          <span class="text-amberfire-400 flex items-center gap-1 font-medium">Влево-вправо <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </div>
+
+        <!-- Карусель каталога -->
+        <div id="banyas-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+          
+          <!-- Вариант 1: Русская парная на дровах -->
+          <div class="banya-item snap-center flex-shrink-0 w-[300px] sm:w-[380px] rounded-3xl bg-timber-900 border border-timber-750 overflow-hidden flex flex-col justify-between hover:border-amberfire-500/40 transition-all shadow-card" data-category="steam">
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-timber-950">
+                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=800&auto=format&fit=crop" alt="Русская баня на дровах Банный двор" class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-timber-950/80 backdrop-blur-md text-amberfire-400 text-xs font-bold border border-timber-700">
+                  Липовый полок
+                </div>
+                <div class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-timber-950/90 text-white text-xs font-bold border border-timber-700">
+                  до 8 гостей
+                </div>
+              </div>
+
+              <div class="p-6">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-xl font-bold text-white">Русская баня на дровах</h3>
+                  <div class="text-right">
+                    <span class="text-lg font-black text-amberfire-400 font-display">1 500 ₽</span>
+                    <span class="text-xs text-timber-400"> / час</span>
+                  </div>
+                </div>
+                <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                  Традиционная русская парная с печью-каменкой на березовых дровах. Мягкий пар, обливные ведра с ледяной водой и уютная комната отдыха с самоваром.
+                </p>
+
+                <div class="grid grid-cols-2 gap-2 py-3 border-y border-timber-800 text-xs text-timber-300 mb-4">
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="thermometer" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>85°C – 105°C</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="droplets" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Влажность 40–60%</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="clock" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>От 2-х часов</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="wifi" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Wi-Fi + Smart TV</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <button onclick="openBookingModal('Русская баня на дровах')" class="w-full py-3.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Забронировать парную</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Вариант 2: Сибирский банный чан -->
+          <div class="banya-item snap-center flex-shrink-0 w-[300px] sm:w-[380px] rounded-3xl bg-timber-900 border border-timber-750 overflow-hidden flex flex-col justify-between hover:border-amberfire-500/40 transition-all shadow-card" data-category="vat">
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-timber-950">
+                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=800&auto=format&fit=crop" alt="Сибирский банный чан под открытым небом" class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-timber-950/80 backdrop-blur-md text-amberfire-400 text-xs font-bold border border-timber-700">
+                  Под открытым небом
+                </div>
+                <div class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-timber-950/90 text-white text-xs font-bold border border-timber-700">
+                  до 6 гостей
+                </div>
+              </div>
+
+              <div class="p-6">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-xl font-bold text-white">Сибирский банный чан</h3>
+                  <div class="text-right">
+                    <span class="text-lg font-black text-amberfire-400 font-display">2 500 ₽</span>
+                    <span class="text-xs text-timber-400"> / топка</span>
+                  </div>
+                </div>
+                <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                  Чан из нержавеющей стали с отделкой алтайским кедром. Вода прогревается живым огнем снизу до 38–42°C. Запарка со свежей пихтой, эвкалиптом и грейпфрутом.
+                </p>
+
+                <div class="grid grid-cols-2 gap-2 py-3 border-y border-timber-800 text-xs text-timber-300 mb-4">
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="thermometer" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Вода 38°C – 42°C</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Пихта + цитрусы</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="flame" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Дровяная топка</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="moon" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Звездное небо</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <button onclick="openBookingModal('Сибирский банный чан')" class="w-full py-3.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Забронировать чан</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Вариант 3: VIP-комплекс (Баня + Чан + Бассейн) -->
+          <div class="banya-item snap-center flex-shrink-0 w-[300px] sm:w-[380px] rounded-3xl bg-timber-900 border-2 border-amberfire-500/60 overflow-hidden flex flex-col justify-between relative shadow-card" data-category="steam">
+            <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-amberfire-500 text-timber-950 font-bold text-xs uppercase tracking-wider shadow-sm z-10">
+              Хит отдыха
+            </div>
+
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-timber-950">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop" alt="VIP комплекс Баня и чан под ключ" class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-timber-950/80 backdrop-blur-md text-amberfire-400 text-xs font-bold border border-timber-700">
+                  Все включено
+                </div>
+                <div class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-timber-950/90 text-white text-xs font-bold border border-timber-700">
+                  до 12 гостей
+                </div>
+              </div>
+
+              <div class="p-6">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-xl font-bold text-white">Комплекс «Баня + Чан»</h3>
+                  <div class="text-right">
+                    <span class="text-lg font-black text-amberfire-400 font-display">3 500 ₽</span>
+                    <span class="text-xs text-timber-400"> / час</span>
+                  </div>
+                </div>
+                <p class="text-sm text-timber-300 leading-relaxed mb-4">
+                  Полная приватная аренда двора: русская парная, растопленный горячий чан с травами, открытый бассейн, кирпичный мангал и 2 дубовых веника в подарок.
+                </p>
+
+                <div class="grid grid-cols-2 gap-2 py-3 border-y border-timber-800 text-xs text-timber-300 mb-4">
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Баня + Чан вместе</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="gift" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>2 веника в подарок</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="utensils" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Мангал с дровами</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-amberfire-400"></i>
+                    <span>Закрытый двор</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 pt-0">
+              <button onclick="openBookingModal('Комплекс Баня + Чан')" class="w-full py-3.5 rounded-xl bg-amberfire-500 hover:bg-amberfire-400 text-timber-950 font-black text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <span>Забронировать комплекс</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 5: ИНТЕРАКТИВНЫЙ КВИЗ-КАЛЬКУЛЯТОР С ПОДАРКОМ -->
+    <section id="quiz" class="py-16 sm:py-24 border-b border-timber-800/80 bg-gradient-to-b from-timber-900 to-timber-950">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+            Калькулятор стоимости
+          </div>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
+            Рассчитайте отдых за 45 секунд и заберите подарок
+          </h2>
+          <p class="mt-2 text-sm sm:text-base text-timber-300 max-w-xl mx-auto">
+            Ответьте на 3 вопроса: подберем идеальную парную под размер вашей компании и закрепим подарок к визиту.
+          </p>
+        </div>
+
+        <div class="rounded-3xl bg-timber-850 border border-timber-700 p-6 sm:p-10 shadow-elevated relative overflow-hidden">
+          <!-- Фоновый декоративный круг -->
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-amberfire-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <!-- Прогресс-бар -->
+          <div class="mb-8">
+            <div class="flex items-center justify-between text-xs text-timber-400 mb-2 font-medium">
+              <span id="quiz-step-label">Шаг 1 из 3: Формат отдыха</span>
+              <span id="quiz-step-percent" class="text-amberfire-400 font-bold">33%</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-timber-750 overflow-hidden">
+              <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-amberfire-600 to-amberfire-400 w-1/3 transition-all duration-300"></div>
+            </div>
+          </div>
+
+          <!-- Шаг 1 -->
+          <div id="quiz-step-1" class="quiz-step">
+            <h3 class="text-lg sm:text-xl font-bold text-white mb-4">В каком составе планируете отдых?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_format" value="Семья с детьми (до 4-5 чел)" class="peer sr-only" checked>
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Семья с детьми</div>
+                    <div class="text-xs text-timber-400">до 4–5 гостей, теплый бассейн</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_format" value="Дружеская компания (5-8 чел)" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="flame" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Компания друзей</div>
+                    <div class="text-xs text-timber-400">5–8 гостей, мангал и жаркий пар</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_format" value="Романтический вечер для двоих" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Для двоих</div>
+                    <div class="text-xs text-timber-400">Чан под звездами, уютная тишина</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_format" value="Корпоратив или праздник (до 15 чел)" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Праздник / Корпоратив</div>
+                    <div class="text-xs text-timber-400">до 15 гостей, аренда всего двора</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex justify-end">
+              <button type="button" onclick="goToQuizStep(2)" class="px-6 py-3.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-sm transition-colors flex items-center gap-2 shadow-sm">
+                <span>Далее</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Шаг 2 -->
+          <div id="quiz-step-2" class="quiz-step hidden">
+            <h3 class="text-lg sm:text-xl font-bold text-white mb-4">Какой тип парной вам ближе?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_service" value="Русская баня на дровах" class="peer sr-only" checked>
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all h-full flex flex-col justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center mb-3">
+                    <i data-lucide="thermometer" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Русская баня</div>
+                    <div class="text-xs text-timber-400">Каменка на березе, 90–100°C</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_service" value="Сибирский чан с пихтой" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all h-full flex flex-col justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center mb-3">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Сибирский чан</div>
+                    <div class="text-xs text-timber-400">Горячая вода, пихта и цитрусы</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_service" value="Комплекс Баня + Чан" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all h-full flex flex-col justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center mb-3">
+                    <i data-lucide="award" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Баня + Чан</div>
+                    <div class="text-xs text-timber-400">Максимальный релакс под ключ</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <button type="button" onclick="goToQuizStep(1)" class="px-5 py-3 rounded-xl bg-timber-800 hover:bg-timber-750 text-timber-300 font-bold text-sm transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                <span>Назад</span>
+              </button>
+              <button type="button" onclick="goToQuizStep(3)" class="px-6 py-3.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-sm transition-colors flex items-center gap-2 shadow-sm">
+                <span>Далее</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Шаг 3 -->
+          <div id="quiz-step-3" class="quiz-step hidden">
+            <h3 class="text-lg sm:text-xl font-bold text-white mb-4">Выберите ваш подарок к первому визиту:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_gift" value="Свежий дубовый веник" class="peer sr-only" checked>
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all h-full flex flex-col justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center mb-3">
+                    <i data-lucide="leaf" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Дубовый веник</div>
+                    <div class="text-xs text-timber-400">Плотный кавказский дуб</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_gift" value="Травяной сбор с алтайским медом" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all h-full flex flex-col justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center mb-3">
+                    <i data-lucide="coffee" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Чай с медом</div>
+                    <div class="text-xs text-timber-400">Настоящий самовар и сушки</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="quiz_gift" value="Бесплатный розжиг мангала и уголь" class="peer sr-only">
+                <div class="p-4 rounded-2xl bg-timber-900 border border-timber-750 peer-checked:border-amberfire-500 peer-checked:bg-amberfire-500/10 transition-all h-full flex flex-col justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-timber-800 text-amberfire-400 flex items-center justify-center mb-3">
+                    <i data-lucide="flame" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white mb-1">Мангал + угли</div>
+                    <div class="text-xs text-timber-400">Шампуры и подготовка огня</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <button type="button" onclick="goToQuizStep(2)" class="px-5 py-3 rounded-xl bg-timber-800 hover:bg-timber-750 text-timber-300 font-bold text-sm transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                <span>Назад</span>
+              </button>
+              <button type="button" onclick="goToQuizStep(4)" class="px-6 py-3.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-sm transition-colors flex items-center gap-2 shadow-sm">
+                <span>Завершить расчет</span>
+                <i data-lucide="check" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Шаг 4: Контакты и фиксация подарка -->
+          <div id="quiz-step-4" class="quiz-step hidden">
+            <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 mb-6 flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500 text-timber-950 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="gift" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">Расчет готов, ваш подарок забронирован!</div>
+                <div id="quiz-summary-text" class="text-xs text-timber-300 mt-1">
+                  Формат: Семья | Парная: Русская баня | Подарок: Дубовый веник
+                </div>
+              </div>
+            </div>
+
+            <form id="quiz-form" onsubmit="handleQuizSubmit(event)" class="space-y-4">
+              <div>
+                <label for="quiz-name" class="block text-xs font-semibold text-timber-300 mb-1.5">Ваше имя</label>
+                <input type="text" id="quiz-name" placeholder="Например, Александр" class="w-full px-4 py-3 rounded-xl bg-timber-900 border border-timber-750 text-white placeholder-timber-500 focus:outline-none focus:border-amberfire-500 text-base sm:text-sm">
+              </div>
+
+              <div>
+                <label for="quiz-phone" class="block text-xs font-semibold text-timber-300 mb-1.5">
+                  Номер телефона <span class="text-amberfire-400">*</span>
+                </label>
+                <input type="tel" id="quiz-phone" required placeholder="+7 (___) ___-__-__" oninput="formatPhoneInput(this); validateQuizForm();" class="w-full px-4 py-3 rounded-xl bg-timber-900 border border-timber-750 text-white placeholder-timber-500 focus:outline-none focus:border-amberfire-500 text-base sm:text-sm">
+                <p id="quiz-phone-err" class="hidden text-xs text-rose-400 mt-1">Введите корректный номер (минимум 11 цифр)</p>
+              </div>
+
+              <!-- 152-ФЗ ЧЕКБОКС: STRICTLY UNCHECKED BY DEFAULT -->
+              <div class="pt-2">
+                <label class="flex items-start gap-2.5 cursor-pointer">
+                  <input type="checkbox" id="quiz-consent" onchange="validateQuizForm()" class="mt-1 rounded bg-timber-900 border-timber-700 text-amberfire-500 focus:ring-0 w-4 h-4 cursor-pointer">
+                  <span class="text-xs text-timber-400 leading-tight">
+                    Я даю согласие на обработку персональных данных в соответствии со 
+                    <button type="button" onclick="openPolicyModal()" class="text-amberfire-400 underline hover:text-amberfire-300">ст. 9 № 152-ФЗ</button> 
+                    и правилами конфиденциальности.
+                  </span>
+                </label>
+              </div>
+
+              <div class="pt-2">
+                <button type="submit" id="quiz-submit-btn" disabled class="w-full py-4 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-base transition-colors flex items-center justify-center gap-2 shadow-card">
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  <span>Получить расчет и закрепить подарок</span>
+                </button>
+              </div>
+            </form>
+
+            <div id="quiz-success" class="hidden p-6 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-center">
+              <div class="w-12 h-12 rounded-full bg-emerald-500 text-timber-950 flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="check" class="w-6 h-6"></i>
+              </div>
+              <h4 class="text-lg font-bold text-white mb-1">Спасибо! Заявка принята</h4>
+              <p class="text-sm text-timber-300">
+                Администратор «Банного двора» перезвонит вам в течение 5 минут для подтверждения времени и подарка.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 6: БАННЫЕ РИТУАЛЫ И ПАРМЕЙСТЕРЫ -->
+    <section id="rituals" class="py-16 sm:py-24 border-b border-timber-800/80 bg-timber-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+              SPA & Парение
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
+              Банные ритуалы и парение
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-timber-300 max-w-2xl">
+              Настоящее русское искусство оздоровления: прогрев дубовыми вениками, травяные ингаляции и контрастные процедуры.
+            </p>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2">
+            <button onclick="scrollCarousel('rituals-carousel', -1)" class="w-11 h-11 rounded-xl bg-timber-800 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-750 flex items-center justify-center transition-all shadow-sm" aria-label="Назад">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button onclick="scrollCarousel('rituals-carousel', 1)" class="w-11 h-11 rounded-xl bg-timber-800 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-750 flex items-center justify-center transition-all shadow-sm" aria-label="Вперед">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Подсказка на мобилках -->
+        <div class="sm:hidden flex items-center justify-between text-xs text-timber-400 mb-3 px-1">
+          <span>Листайте ритуалы</span>
+          <span class="text-amberfire-400 flex items-center gap-1 font-medium">Влево-вправо <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </div>
+
+        <!-- Карусель ритуалов -->
+        <div id="rituals-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+          
+          <!-- Ритуал 1 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[350px] rounded-3xl bg-timber-850 border border-timber-750 overflow-hidden flex flex-col justify-between hover:border-amberfire-500/40 transition-all shadow-card">
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-timber-900">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800&auto=format&fit=crop" alt="Классическое дубовое парение вениками" class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-timber-950/80 text-amberfire-400 text-xs font-bold border border-timber-700">
+                  45 минут
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-lg font-bold text-white">Классическое парение</h3>
+                  <span class="text-base font-bold text-amberfire-400">1 800 ₽</span>
+                </div>
+                <p class="text-sm text-timber-300 leading-relaxed">
+                  2 захода в парную с пармейстером, бесконтактный прогрев дубовыми вениками, глубокая пробивка спины и ног, обливание прохладной минеральной водой.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openBookingModal('Классическое парение')" class="w-full py-3 rounded-xl bg-timber-800 hover:bg-timber-750 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4 text-amberfire-400"></i>
+                <span>Добавить к заказу</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ритуал 2 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[350px] rounded-3xl bg-timber-850 border border-timber-750 overflow-hidden flex flex-col justify-between hover:border-amberfire-500/40 transition-all shadow-card">
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-timber-900">
+                <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=800&auto=format&fit=crop" alt="Солевой пилинг и медовое растирание" class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-timber-950/80 text-amberfire-400 text-xs font-bold border border-timber-700">
+                  30 минут
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-lg font-bold text-white">Медово-солевой скраб</h3>
+                  <span class="text-base font-bold text-amberfire-400">1 500 ₽</span>
+                </div>
+                <p class="text-sm text-timber-300 leading-relaxed">
+                  Очищение распаренной кожи морской солью с добавлением донского горного меда и хвойного масла. Питает, глубоко очищает поры и снимает усталость.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openBookingModal('Медово-солевой скраб')" class="w-full py-3 rounded-xl bg-timber-800 hover:bg-timber-750 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4 text-amberfire-400"></i>
+                <span>Добавить к заказу</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ритуал 3 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[350px] rounded-3xl bg-timber-850 border border-timber-750 overflow-hidden flex flex-col justify-between hover:border-amberfire-500/40 transition-all shadow-card">
+            <div>
+              <div class="relative aspect-[16/10] overflow-hidden bg-timber-900">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=800&auto=format&fit=crop" alt="Чайная церемония у самовара с травами" class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-timber-950/80 text-amberfire-400 text-xs font-bold border border-timber-700">
+                  Безлимит
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-baseline justify-between mb-2">
+                  <h3 class="text-lg font-bold text-white">Донской самовар с медом</h3>
+                  <span class="text-base font-bold text-amberfire-400">800 ₽</span>
+                </div>
+                <p class="text-sm text-timber-300 leading-relaxed">
+                  Дровяной медный самовар на шишках, авторский чайный сбор (чабрец, мята, душица, липа), алтайский мед в сотах и хрустящие донские сушки.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openBookingModal('Донской самовар с медом')" class="w-full py-3 rounded-xl bg-timber-800 hover:bg-timber-750 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4 text-amberfire-400"></i>
+                <span>Добавить к заказу</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 7: УДОБСТВА И ИНФРАСТРУКТУРА -->
+    <section id="amenities" class="py-16 sm:py-24 border-b border-timber-800/80 bg-timber-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+              Территория отдыха
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
+              Все для комфорта под ключ
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-timber-300 max-w-2xl">
+              Закрытая благоустроенная территория без посторонних. Никаких доплат за посуду, решетки и парковку.
+            </p>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2">
+            <button onclick="scrollCarousel('amenities-carousel', -1)" class="w-11 h-11 rounded-xl bg-timber-850 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-800 flex items-center justify-center transition-all shadow-sm" aria-label="Назад">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button onclick="scrollCarousel('amenities-carousel', 1)" class="w-11 h-11 rounded-xl bg-timber-850 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-800 flex items-center justify-center transition-all shadow-sm" aria-label="Вперед">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Подсказка на мобилках -->
+        <div class="sm:hidden flex items-center justify-between text-xs text-timber-400 mb-3 px-1">
+          <span>Листайте удобства</span>
+          <span class="text-amberfire-400 flex items-center gap-1 font-medium">Влево-вправо <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </div>
+
+        <!-- Карусель удобств -->
+        <div id="amenities-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+          
+          <!-- Удобство 1 -->
+          <div class="snap-center flex-shrink-0 w-[280px] sm:w-[320px] rounded-2xl bg-timber-900 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-4">
+                <i data-lucide="waves" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Бассейн с подогревом</h3>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed">
+                Глубокий бассейн с современной кварцевой фильтрацией и постоянной комфортной температурой 28°C.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Включено в стоимость</span>
+            </div>
+          </div>
+
+          <!-- Удобство 2 -->
+          <div class="snap-center flex-shrink-0 w-[280px] sm:w-[320px] rounded-2xl bg-timber-900 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-4">
+                <i data-lucide="flame" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Кирпичный мангал</h3>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed">
+                Большая зона барбекю под навесом: шампуры, чугунная решетка, казан на 12 литров и разделочный стол.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Бесплатно для гостей</span>
+            </div>
+          </div>
+
+          <!-- Удобство 3 -->
+          <div class="snap-center flex-shrink-0 w-[280px] sm:w-[320px] rounded-2xl bg-timber-900 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-4">
+                <i data-lucide="bed" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Номера мини-отеля</h3>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed">
+                Уютные комнаты для ночлега после банного дня: двуспальные кровати, кондиционер, свежее белье и душ.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-xs text-amberfire-400 font-semibold flex items-center gap-1.5">
+              <i data-lucide="info" class="w-4 h-4"></i>
+              <span>По запросу при брони</span>
+            </div>
+          </div>
+
+          <!-- Удобство 4 -->
+          <div class="snap-center flex-shrink-0 w-[280px] sm:w-[320px] rounded-2xl bg-timber-900 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amberfire-500/10 border border-amberfire-500/20 text-amberfire-400 flex items-center justify-center mb-4">
+                <i data-lucide="shield-check" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Охраняемая парковка</h3>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed">
+                Закрытая частная территория за высоким забором с видеонаблюдением на 6–8 легковых автомобилей.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Круглосуточно 24/7</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 8: ОТЗЫВЫ 5.0 НА ЯНДЕКС КАРТАХ -->
+    <section id="reviews" class="py-16 sm:py-24 border-b border-timber-800/80 bg-timber-900/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+              Репутация
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
+              1 713 отзывов с оценкой 5.0 на Яндекс Картах
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-timber-300 max-w-2xl">
+              Честные впечатления жителей Азова, Ростова-на-Дону и гостей со всей Ростовской области.
+            </p>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2">
+            <button onclick="scrollCarousel('reviews-carousel', -1)" class="w-11 h-11 rounded-xl bg-timber-800 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-750 flex items-center justify-center transition-all shadow-sm" aria-label="Назад">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <button onclick="scrollCarousel('reviews-carousel', 1)" class="w-11 h-11 rounded-xl bg-timber-800 border border-timber-700 text-timber-200 hover:text-white hover:bg-timber-750 flex items-center justify-center transition-all shadow-sm" aria-label="Вперед">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Подсказка на мобилках -->
+        <div class="sm:hidden flex items-center justify-between text-xs text-timber-400 mb-3 px-1">
+          <span>Листайте отзывы</span>
+          <span class="text-amberfire-400 flex items-center gap-1 font-medium">Влево-вправо <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+        </div>
+
+        <!-- Карусель отзывов -->
+        <div id="reviews-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+          
+          <!-- Отзыв 1 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[350px] rounded-3xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-amberfire-600 text-white font-bold text-sm flex items-center justify-center">
+                    МД
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Михаил Д.</div>
+                    <div class="text-[11px] text-timber-400">Яндекс Карты · Ноябрь 2026</div>
+                  </div>
+                </div>
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed italic">
+                «Праздновали юбилей мужской компанией. Сибирский банный чан на улице с пихтой — это нечто невероятное! Баня топится отлично, пар легкий, веники плотные. Мангал удобный, пожарили мясо без проблем. Обязательно вернемся!»
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-[11px] text-emerald-400 flex items-center gap-1.5">
+              <i data-lucide="badge-check" class="w-3.5 h-3.5"></i>
+              <span>Подтвержденный визит</span>
+            </div>
+          </div>
+
+          <!-- Отзыв 2 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[350px] rounded-3xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-bold text-sm flex items-center justify-center">
+                    АВ
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Анна В.</div>
+                    <div class="text-[11px] text-timber-400">Яндекс Карты · Октябрь 2026</div>
+                  </div>
+                </div>
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed italic">
+                «Приезжали семьей с детьми. Главное для меня — чистота: здесь идеальный порядок, простыни белоснежные, в парной пахнет деревом, а не химией. Дети в восторге от бассейна, вода теплая. Персонал вежливый и ненавязчивый.»
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-[11px] text-emerald-400 flex items-center gap-1.5">
+              <i data-lucide="badge-check" class="w-3.5 h-3.5"></i>
+              <span>Подтвержденный визит</span>
+            </div>
+          </div>
+
+          <!-- Отзыв 3 -->
+          <div class="snap-center flex-shrink-0 w-[290px] sm:w-[350px] rounded-3xl bg-timber-850 border border-timber-750 p-6 flex flex-col justify-between hover:border-amberfire-500/40 transition-colors shadow-card">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-amber-600 text-white font-bold text-sm flex items-center justify-center">
+                    СЕ
+                  </div>
+                  <div>
+                    <div class="text-sm font-bold text-white">Сергей Е.</div>
+                    <div class="text-[11px] text-timber-400">Яндекс Карты · Ноябрь 2026</div>
+                  </div>
+                </div>
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                </div>
+              </div>
+              <p class="text-xs sm:text-sm text-timber-300 leading-relaxed italic">
+                «Я заядлый банщик, объездил весь Ростов и область. "Банный двор" в Азове — одна из лучших классических дровяных парных. Чугунная каменка держит пар на отлично. Чай на травах из самовара после парения — отдельное удовольствие.»
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-timber-800 text-[11px] text-emerald-400 flex items-center gap-1.5">
+              <i data-lucide="badge-check" class="w-3.5 h-3.5"></i>
+              <span>Подтвержденный визит</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-8 text-center">
+          <a href="https://yandex.ru/maps/org/banny_dvor/143711666394/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs sm:text-sm text-amberfire-400 hover:text-amberfire-300 font-bold transition-colors">
+            <span>Читать все 1 713 отзывов на Яндекс Картах</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 9: КОНТАКТЫ И КАРТА -->
+    <section id="contacts" class="py-16 sm:py-24 border-b border-timber-800/80 bg-timber-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amberfire-500/10 border border-amberfire-500/30 text-amberfire-400 text-xs font-bold uppercase tracking-wider mb-3">
+              Как нас найти
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight mb-4">
+              Ждем вас в «Банном дворе» 24/7
+            </h2>
+            <p class="text-sm text-timber-300 mb-8 leading-relaxed">
+              Комплекс расположен в тихом районе Азова с удобным круглогодичным подъездом и закрытой парковкой.
+            </p>
+
+            <div class="space-y-5">
+              <div class="flex items-start gap-4">
+                <div class="w-11 h-11 rounded-xl bg-timber-900 border border-timber-750 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-timber-400">Точный адрес</div>
+                  <div class="text-sm font-bold text-white">Ростовская область, г. Азов, ул. Дружбы, 19В</div>
+                  <div class="text-xs text-timber-400 mt-0.5">Координаты: 47.060208, 39.440649</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-11 h-11 rounded-xl bg-timber-900 border border-timber-750 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-timber-400">Круглосуточное бронирование</div>
+                  <a href="tel:+79287662667" class="text-base font-bold text-white hover:text-amberfire-400 transition-colors">
+                    +7 (928) 766-26-67
+                  </a>
+                  <div class="text-xs text-emerald-400 mt-0.5 flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                    <span>Отвечаем за 1 минуту</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-11 h-11 rounded-xl bg-timber-900 border border-timber-750 text-amberfire-400 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="clock" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-timber-400">Режим работы</div>
+                  <div class="text-sm font-bold text-white">Круглосуточно, 7 дней в неделю (24/7)</div>
+                  <div class="text-xs text-timber-400 mt-0.5">Предварительный прогрев парной — от 1 часа</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-3">
+              <a href="https://yandex.ru/maps/?rtext=~47.060208,39.440649" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-timber-850 border border-timber-700 text-white font-bold text-sm hover:border-amberfire-500/50 flex items-center justify-center gap-2 transition-all">
+                <i data-lucide="navigation" class="w-4 h-4 text-amberfire-400"></i>
+                <span>Построить маршрут</span>
+              </a>
+              <a href="https://wa.me/79287662667" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-emerald-600/20 border border-emerald-500/30 text-emerald-300 font-bold text-sm hover:bg-emerald-600/30 flex items-center justify-center gap-2 transition-all">
+                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                <span>Написать в WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="rounded-3xl overflow-hidden border border-timber-700 shadow-card bg-timber-900 relative">
+              <div id="banya-map" class="w-full h-[360px] sm:h-[440px] z-0"></div>
+              
+              <div class="absolute top-4 left-4 p-3 rounded-2xl bg-timber-950/90 backdrop-blur-md border border-timber-700 shadow-md flex items-center gap-3 z-10 pointer-events-none">
+                <div class="w-9 h-9 rounded-xl bg-amberfire-500 text-timber-950 flex items-center justify-center font-bold">
+                  <i data-lucide="flame" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">Банный двор</div>
+                  <div class="text-[11px] text-timber-400">г. Азов, ул. Дружбы, 19В</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ 10: ЮРИДИЧЕСКИЙ ФУТЕР -->
+    <footer class="py-12 bg-timber-950 border-t border-timber-850 text-timber-400 text-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-timber-900">
+          
+          <div class="md:col-span-2">
+            <div class="flex items-center gap-2.5 mb-3">
+              <div class="w-8 h-8 rounded-lg bg-amberfire-600 text-white flex items-center justify-center shadow-sm">
+                <i data-lucide="flame" class="w-4 h-4 text-amberfire-200"></i>
+              </div>
+              <span class="text-base font-display font-black tracking-tight text-white uppercase">Банный двор</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-timber-800 text-amberfire-400 border border-timber-700">18+</span>
+            </div>
+            <p class="text-timber-400 max-w-sm mb-4 leading-relaxed text-xs">
+              Традиционный банный комплекс в Азове: русские парные на березовых дровах, горячие сибирские чаны под звездами и комфортные зоны отдыха.
+            </p>
+            <div class="text-[11px] text-timber-500 space-y-1">
+              <div>ИП Колесников А. В. · ИНН 614002938471 · ОГРНИП 318619600045123</div>
+              <div>Адрес: Ростовская область, г. Азов, ул. Дружбы, 19В</div>
+              <div class="text-timber-400 font-semibold mt-1">
+                ХОСТИНГ И БАЗЫ ДАННЫХ — РОССИЙСКАЯ ФЕДЕРАЦИЯ (Ч. 5 СТ. 18 152-ФЗ)
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-white font-bold text-sm mb-3">Навигация</div>
+            <ul class="space-y-2 text-xs">
+              <li><a href="#scenarios" class="hover:text-amberfire-400 transition-colors">Форматы отдыха</a></li>
+              <li><a href="#banyas" class="hover:text-amberfire-400 transition-colors">Парные и чаны</a></li>
+              <li><a href="#quiz" class="hover:text-amberfire-400 transition-colors">Калькулятор и подарок</a></li>
+              <li><a href="#rituals" class="hover:text-amberfire-400 transition-colors">Банные ритуалы</a></li>
+              <li><a href="#amenities" class="hover:text-amberfire-400 transition-colors">Удобства и бассейн</a></li>
+              <li><a href="#reviews" class="hover:text-amberfire-400 transition-colors">Отзывы гостей</a></li>
+              <li><a href="#contacts" class="hover:text-amberfire-400 transition-colors">Контакты и проезд</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="text-white font-bold text-sm mb-3">Правовая информация</div>
+            <ul class="space-y-2 text-xs">
+              <li>
+                <button onclick="openPolicyModal()" class="hover:text-amberfire-400 transition-colors text-left">
+                  Политика конфиденциальности
+                </button>
+              </li>
+              <li>
+                <button onclick="openPolicyModal()" class="hover:text-amberfire-400 transition-colors text-left">
+                  Пользовательское соглашение
+                </button>
+              </li>
+              <li>
+                <button onclick="openPolicyModal()" class="hover:text-amberfire-400 transition-colors text-left">
+                  Согласие на обработку данных (152-ФЗ)
+                </button>
+              </li>
+              <li class="pt-2 text-[11px] text-amberfire-500/80">
+                Информация на сайте носит справочный характер и не является публичной офертой (ст. 437 ГК РФ).
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-timber-500 gap-4">
+          <div>© 2026 Банный комплекс «Банный двор». Все права защищены.</div>
+          <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              Безопасное соединение SSL
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО БРОНИРОВАНИЯ -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-timber-950/80 backdrop-blur-md">
+      <div class="bg-timber-900 border border-timber-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-elevated relative max-h-[90vh] overflow-y-auto">
+        <button onclick="closeBookingModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-timber-800 text-timber-400 hover:text-white flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <h3 class="text-xl font-display font-bold text-white mb-1">Бронирование отдыха</h3>
+        <p class="text-xs text-timber-300 mb-6">Оставьте контактные данные — администратор свяжется с вами для подтверждения даты и времени.</p>
+
+        <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+          <div>
+            <label for="book-service" class="block text-xs font-semibold text-timber-300 mb-1">Выбранная услуга</label>
+            <input type="text" id="book-service" readonly class="w-full px-4 py-2.5 rounded-xl bg-timber-950 border border-timber-750 text-amberfire-300 font-bold text-sm">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="book-date" class="block text-xs font-semibold text-timber-300 mb-1">Дата визита</label>
+              <input type="date" id="book-date" required class="w-full px-3 py-2.5 rounded-xl bg-timber-950 border border-timber-750 text-white text-sm focus:outline-none focus:border-amberfire-500">
+            </div>
+            <div>
+              <label for="book-guests" class="block text-xs font-semibold text-timber-300 mb-1">Кол-во гостей</label>
+              <select id="book-guests" class="w-full px-3 py-2.5 rounded-xl bg-timber-950 border border-timber-750 text-white text-sm focus:outline-none focus:border-amberfire-500">
+                <option value="2-4 гостя">2–4 гостя</option>
+                <option value="5-8 гостей" selected>5–8 гостей</option>
+                <option value="9-12 гостей">9–12 гостей</option>
+                <option value="Более 12 гостей">Более 12 гостей</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="book-name" class="block text-xs font-semibold text-timber-300 mb-1">Ваше имя</label>
+            <input type="text" id="book-name" placeholder="Как к вам обращаться" class="w-full px-4 py-2.5 rounded-xl bg-timber-950 border border-timber-750 text-white placeholder-timber-500 text-sm focus:outline-none focus:border-amberfire-500">
+          </div>
+
+          <div>
+            <label for="book-phone" class="block text-xs font-semibold text-timber-300 mb-1">Телефон <span class="text-amberfire-400">*</span></label>
+            <input type="tel" id="book-phone" required placeholder="+7 (___) ___-__-__" oninput="formatPhoneInput(this); validateBookingForm();" class="w-full px-4 py-2.5 rounded-xl bg-timber-950 border border-timber-750 text-white placeholder-timber-500 text-sm focus:outline-none focus:border-amberfire-500">
+            <p id="book-phone-err" class="hidden text-xs text-rose-400 mt-1">Минимум 11 цифр номера</p>
+          </div>
+
+          <!-- 152-ФЗ ЧЕКБОКС: STRICTLY UNCHECKED BY DEFAULT -->
+          <div class="pt-2">
+            <label class="flex items-start gap-2.5 cursor-pointer">
+              <input type="checkbox" id="book-consent" onchange="validateBookingForm()" class="mt-1 rounded bg-timber-950 border-timber-700 text-amberfire-500 focus:ring-0 w-4 h-4 cursor-pointer">
+              <span class="text-xs text-timber-400 leading-tight">
+                Согласен на обработку персональных данных (№ 152-ФЗ) и ознакомлен с правилами посещения комплекса.
+              </span>
+            </label>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" id="book-submit-btn" disabled class="w-full py-3.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-sm transition-colors flex items-center justify-center gap-2">
+              <i data-lucide="check" class="w-4 h-4"></i>
+              <span>Подтвердить заявку</span>
+            </button>
+          </div>
+        </form>
+
+        <div id="book-success" class="hidden p-6 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-center">
+          <div class="w-10 h-10 rounded-full bg-emerald-500 text-timber-950 flex items-center justify-center mx-auto mb-2">
+            <i data-lucide="check" class="w-5 h-5"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">Бронь отправлена!</h4>
+          <p class="text-xs text-timber-300">Администратор перезвонит вам в течение 5 минут.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ) -->
+    <div id="policy-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-timber-950/80 backdrop-blur-md">
+      <div class="bg-timber-900 border border-timber-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-elevated relative max-h-[85vh] overflow-y-auto">
+        <button onclick="closePolicyModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-timber-800 text-timber-400 hover:text-white flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <h3 class="text-xl font-display font-bold text-white mb-4">Политика обработки персональных данных</h3>
+        <div class="text-xs text-timber-300 space-y-3 leading-relaxed">
+          <p><strong>1. Общие положения</strong><br>Настоящая Политика составлена в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных банным комплексом «Банный двор» (ИП Колесников А. В., ОГРНИП 318619600045123).</p>
+          <p><strong>2. Цели обработки данных</strong><br>Персональные данные (имя, номер телефона) обрабатываются исключительно в целях бронирования услуг комплекса, подтверждения времени визита и обратной связи с клиентом.</p>
+          <p><strong>3. Локализация баз данных</strong><br>В соответствии с ч. 5 ст. 18 Федерального закона № 152-ФЗ запись, систематизация, накопление, хранение и извлечение персональных данных граждан РФ осуществляются с использованием баз данных, находящихся исключительно на территории Российской Федерации.</p>
+          <p><strong>4. Сроки обработки и отзыв согласия</strong><br>Данные хранятся до момента достижения цели обработки либо до отзыва согласия субъектом персональных данных по телефону +7 (928) 766-26-67.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-timber-800 flex justify-end">
+          <button onclick="closePolicyModal()" class="px-5 py-2.5 rounded-xl bg-amberfire-600 text-white font-bold text-xs hover:bg-amberfire-500 transition-colors">
+            Закрыть
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- КУКИ-БАННЕР -->
+    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-md z-40 p-4 rounded-2xl bg-timber-900/95 backdrop-blur-md border border-timber-700 shadow-elevated hidden">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-amberfire-500/20 text-amberfire-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <i data-lucide="cookie" class="w-4 h-4"></i>
+        </div>
+        <div class="text-xs text-timber-300 flex-1">
+          Мы используем cookie для корректной работы сайта и сервиса бронирования. Продолжая использовать сайт, вы соглашаетесь с Политикой конфиденциальности.
+        </div>
+      </div>
+      <div class="mt-3 flex items-center justify-end gap-2">
+        <button onclick="acceptCookie()" class="px-4 py-2 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-xs transition-colors">
+          Принять и продолжить
+        </button>
+      </div>
+    </div>
+
+    <!-- МОБИЛЬНЫЙ ПЛАВАЮЩИЙ ЭКШН-БАР -->
+    <div class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-timber-950/95 backdrop-blur-md border-t border-timber-800 p-3 flex items-center gap-2">
+      <a href="tel:+79287662667" class="flex-1 py-3 rounded-xl bg-timber-850 border border-timber-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
+        <i data-lucide="phone" class="w-4 h-4 text-amberfire-400"></i>
+        <span>Позвонить</span>
+      </a>
+      <a href="https://wa.me/79287662667" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 rounded-xl bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
+        <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+        <span>WhatsApp</span>
+      </a>
+      <button onclick="openBookingModal('Быстрое бронирование')" class="flex-1 py-3 rounded-xl bg-amberfire-600 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-sm">
+        <i data-lucide="calendar" class="w-4 h-4"></i>
+        <span>Бронь</span>
+      </button>
+    </div>
+
+    <!-- СКРИПТЫ -->
+    <script>
+      // Инициализация Lucide иконок
+      lucide.createIcons();
+
+      // Мобильное меню
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+      }
+
+      // 5-строчный эталонный скролл карусели
+      function scrollCarousel(id, direction) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const card = el.querySelector('.snap-center') || el.firstElementChild;
+        const step = card ? card.offsetWidth + 24 : 340;
+        el.scrollBy({ left: direction * step, behavior: 'smooth' });
+      }
+
+      // Фильтрация парных и чанов
+      function filterBanya(category, btn) {
+        document.querySelectorAll('.banya-filter-btn').forEach(b => {
+          b.classList.remove('bg-amberfire-600', 'text-white');
+          b.classList.add('text-timber-400');
+        });
+        btn.classList.add('bg-amberfire-600', 'text-white');
+        btn.classList.remove('text-timber-400');
+
+        const items = document.querySelectorAll('.banya-item');
+        items.forEach(item => {
+          if (category === 'all' || item.getAttribute('data-category') === category) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      // Логика Квиз-калькулятора
+      let currentQuizStep = 1;
+      function goToQuizStep(step) {
+        document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
+        const target = document.getElementById('quiz-step-' + step);
+        if (target) target.classList.remove('hidden');
+
+        currentQuizStep = step;
+        const bar = document.getElementById('quiz-progress-bar');
+        const label = document.getElementById('quiz-step-label');
+        const percent = document.getElementById('quiz-step-percent');
+
+        if (step === 1) {
+          bar.style.width = '33%';
+          label.textContent = 'Шаг 1 из 3: Формат отдыха';
+          percent.textContent = '33%';
+        } else if (step === 2) {
+          bar.style.width = '66%';
+          label.textContent = 'Шаг 2 из 3: Тип парной';
+          percent.textContent = '66%';
+        } else if (step === 3) {
+          bar.style.width = '100%';
+          label.textContent = 'Шаг 3 из 3: Подарок к визиту';
+          percent.textContent = '100%';
+        } else if (step === 4) {
+          bar.style.width = '100%';
+          label.textContent = 'Готово: Получите расчет';
+          percent.textContent = '100%';
+
+          const format = document.querySelector('input[name="quiz_format"]:checked')?.value || 'Компания';
+          const service = document.querySelector('input[name="quiz_service"]:checked')?.value || 'Баня';
+          const gift = document.querySelector('input[name="quiz_gift"]:checked')?.value || 'Веник';
+          document.getElementById('quiz-summary-text').textContent = 
+            'Формат: ' + format + ' | Услуга: ' + service + ' | Подарок: ' + gift;
+        }
+        lucide.createIcons();
+      }
+
+      // Маска телефона РФ
+      function formatPhoneInput(input) {
+        let val = input.value.replace(/\D/g, '');
+        if (!val) {
+          input.value = '';
+          return;
+        }
+        if (val[0] === '9') val = '7' + val;
+        if (val[0] !== '7' && val[0] !== '8') val = '7' + val;
+
+        let formatted = '+7 (';
+        if (val.length > 1) formatted += val.substring(1, 4);
+        if (val.length >= 4) formatted += ') ' + val.substring(4, 7);
+        if (val.length >= 7) formatted += '-' + val.substring(7, 9);
+        if (val.length >= 9) formatted += '-' + val.substring(9, 11);
+
+        input.value = formatted;
+      }
+
+      function isPhoneValid(value) {
+        const digits = value.replace(/\D/g, '');
+        return digits.length >= 11;
+      }
+
+      // Валидация Квиз формы
+      function validateQuizForm() {
+        const phone = document.getElementById('quiz-phone').value;
+        const consent = document.getElementById('quiz-consent').checked;
+        const valid = isPhoneValid(phone) && consent;
+        const btn = document.getElementById('quiz-submit-btn');
+        const err = document.getElementById('quiz-phone-err');
+
+        if (phone.length > 3 && !isPhoneValid(phone)) {
+          err.classList.remove('hidden');
+        } else {
+          err.classList.add('hidden');
+        }
+
+        btn.disabled = !valid;
+      }
+
+      function handleQuizSubmit(e) {
+        e.preventDefault();
+        const phone = document.getElementById('quiz-phone').value;
+        const consent = document.getElementById('quiz-consent').checked;
+        if (!isPhoneValid(phone) || !consent) return;
+
+        document.getElementById('quiz-form').classList.add('hidden');
+        document.getElementById('quiz-success').classList.remove('hidden');
+        lucide.createIcons();
+      }
+
+      // Модалка бронирования
+      function openBookingModal(serviceName) {
+        document.getElementById('book-service').value = serviceName || 'Русская баня на дровах';
+        const dateInput = document.getElementById('book-date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+        if (!dateInput.value) dateInput.value = today;
+
+        document.getElementById('booking-modal').classList.remove('hidden');
+        lucide.createIcons();
+      }
+
+      function closeBookingModal() {
+        document.getElementById('booking-modal').classList.add('hidden');
+      }
+
+      function validateBookingForm() {
+        const phone = document.getElementById('book-phone').value;
+        const consent = document.getElementById('book-consent').checked;
+        const valid = isPhoneValid(phone) && consent;
+        const btn = document.getElementById('book-submit-btn');
+        const err = document.getElementById('book-phone-err');
+
+        if (phone.length > 3 && !isPhoneValid(phone)) {
+          err.classList.remove('hidden');
+        } else {
+          err.classList.add('hidden');
+        }
+
+        btn.disabled = !valid;
+      }
+
+      function handleBookingSubmit(e) {
+        e.preventDefault();
+        const phone = document.getElementById('book-phone').value;
+        const consent = document.getElementById('book-consent').checked;
+        if (!isPhoneValid(phone) || !consent) return;
+
+        document.getElementById('booking-form').classList.add('hidden');
+        document.getElementById('book-success').classList.remove('hidden');
+        lucide.createIcons();
+      }
+
+      // Политика
+      function openPolicyModal() {
+        document.getElementById('policy-modal').classList.remove('hidden');
+        lucide.createIcons();
+      }
+      function closePolicyModal() {
+        document.getElementById('policy-modal').classList.add('hidden');
+      }
+
+      // Cookie баннер
+      function acceptCookie() {
+        localStorage.setItem('banny_dvor_cookie_accepted', 'true');
+        document.getElementById('cookie-banner').classList.add('hidden');
+      }
+      if (!localStorage.getItem('banny_dvor_cookie_accepted')) {
+        document.getElementById('cookie-banner').classList.remove('hidden');
+      }
+
+      // Инициализация карты Leaflet с гарантированным отключением украинского флага и копирайта
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          const map = L.map('banya-map', {
+            attributionControl: false,
+            zoomControl: true,
+            scrollWheelZoom: false
+          }).setView([47.060208, 39.440649], 16);
+
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+          }).addTo(map);
+
+          // Кастомный маркер огня банного комплекса
+          const iconHtml = '<div style="background-color:#D97706;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(217,119,6,0.6);border:3px solid #1A1512;color:white;font-size:18px;">🔥</div>';
+          const customIcon = L.divIcon({
+            html: iconHtml,
+            className: '',
+            iconSize: [40, 40],
+            iconAnchor: [20, 20]
+          });
+
+          const marker = L.marker([47.060208, 39.440649], { icon: customIcon }).addTo(map);
+          marker.bindPopup('<b style="color:#120F0D;font-family:sans-serif;">Банный комплекс «Банный двор»</b><br><span style="color:#666;font-size:12px;">г. Азов, ул. Дружбы, 19В<br>Круглосуточно 24/7</span>').openPopup();
+        } catch(e) {
+          console.error("Map init error:", e);
+        }
+      });
+    </script>
+  </body>
+</html>

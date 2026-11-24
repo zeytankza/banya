@@ -850,7 +850,7 @@
                   <input type="checkbox" id="quiz-consent" onchange="validateQuizForm()" class="mt-1 rounded bg-timber-900 border-timber-700 text-amberfire-500 focus:ring-0 w-4 h-4 cursor-pointer">
                   <span class="text-xs text-timber-400 leading-tight">
                     Я даю согласие на обработку персональных данных в соответствии со 
-                    <button type="button" onclick="openPolicyModal()" class="text-amberfire-400 underline hover:text-amberfire-300">ст. 9 № 152-ФЗ</button> 
+                    <button type="button" onclick="openPolicyModal('privacy')" class="text-amberfire-400 underline hover:text-amberfire-300">ст. 9 № 152-ФЗ</button> 
                     и правилами конфиденциальности.
                   </span>
                 </label>
@@ -1375,17 +1375,17 @@
             <div class="text-white font-bold text-sm mb-3">Правовая информация</div>
             <ul class="space-y-2 text-xs">
               <li>
-                <button onclick="openPolicyModal()" class="hover:text-amberfire-400 transition-colors text-left">
+                <button onclick="openPolicyModal('privacy')" class="hover:text-amberfire-400 transition-colors text-left">
                   Политика конфиденциальности
                 </button>
               </li>
               <li>
-                <button onclick="openPolicyModal()" class="hover:text-amberfire-400 transition-colors text-left">
+                <button onclick="openPolicyModal('terms')" class="hover:text-amberfire-400 transition-colors text-left">
                   Пользовательское соглашение
                 </button>
               </li>
               <li>
-                <button onclick="openPolicyModal()" class="hover:text-amberfire-400 transition-colors text-left">
+                <button onclick="openPolicyModal('privacy')" class="hover:text-amberfire-400 transition-colors text-left">
                   Согласие на обработку данных (152-ФЗ)
                 </button>
               </li>
@@ -1480,25 +1480,131 @@
       </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ) -->
-    <div id="policy-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-timber-950/80 backdrop-blur-md">
-      <div class="bg-timber-900 border border-timber-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-elevated relative max-h-[85vh] overflow-y-auto">
-        <button onclick="closePolicyModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-timber-800 text-timber-400 hover:text-white flex items-center justify-center transition-colors">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-
-        <h3 class="text-xl font-display font-bold text-white mb-4">Политика обработки персональных данных</h3>
-        <div class="text-xs text-timber-300 space-y-3 leading-relaxed">
-          <p><strong>1. Общие положения</strong><br>Настоящая Политика составлена в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных банным комплексом «Банный двор» (ИП Колесников А. В., ОГРНИП 318619600045123).</p>
-          <p><strong>2. Цели обработки данных</strong><br>Персональные данные (имя, номер телефона) обрабатываются исключительно в целях бронирования услуг комплекса, подтверждения времени визита и обратной связи с клиентом.</p>
-          <p><strong>3. Локализация баз данных</strong><br>В соответствии с ч. 5 ст. 18 Федерального закона № 152-ФЗ запись, систематизация, накопление, хранение и извлечение персональных данных граждан РФ осуществляются с использованием баз данных, находящихся исключительно на территории Российской Федерации.</p>
-          <p><strong>4. Сроки обработки и отзыв согласия</strong><br>Данные хранятся до момента достижения цели обработки либо до отзыва согласия субъектом персональных данных по телефону +7 (928) 766-26-67.</p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-timber-800 flex justify-end">
-          <button onclick="closePolicyModal()" class="px-5 py-2.5 rounded-xl bg-amberfire-600 text-white font-bold text-xs hover:bg-amberfire-500 transition-colors">
-            Закрыть
+    <!-- МОДАЛЬНОЕ ОКНО ПРАВОВОЙ ИНФОРМАЦИИ (152-ФЗ, СОГЛАШЕНИЕ, COOKIE) -->
+    <div id="policy-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 bg-timber-950/85 backdrop-blur-md">
+      <div class="bg-timber-900 border border-timber-700/80 rounded-2xl sm:rounded-3xl max-w-3xl w-full p-5 sm:p-8 shadow-elevated relative max-h-[90vh] flex flex-col text-timber-200">
+        
+        <!-- Header -->
+        <div class="flex items-start justify-between border-b border-timber-800 pb-4 mb-4 shrink-0">
+          <div>
+            <span class="text-amberfire-400 text-[10px] uppercase tracking-wider font-semibold">152-ФЗ РФ • Защита персональных данных</span>
+            <h3 id="legal-modal-title" class="text-lg sm:text-xl font-display font-bold text-white mt-0.5">Политика конфиденциальности (152-ФЗ)</h3>
+          </div>
+          <button onclick="closePolicyModal()" class="w-9 h-9 rounded-full bg-timber-800 text-timber-400 hover:text-white flex items-center justify-center transition-colors shrink-0" aria-label="Закрыть">
+            <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex items-center gap-2 border-b border-timber-800 pb-3 mb-4 shrink-0 overflow-x-auto scrollbar-none">
+          <button id="legal-tab-btn-privacy" onclick="switchLegalTab('privacy')" class="px-3.5 py-1.5 rounded-xl font-bold text-xs transition bg-amberfire-600 text-white whitespace-nowrap">
+            Политика конфиденциальности (152-ФЗ)
+          </button>
+          <button id="legal-tab-btn-terms" onclick="switchLegalTab('terms')" class="px-3.5 py-1.5 rounded-xl font-medium text-xs transition bg-timber-800 text-timber-400 hover:text-white border border-timber-700/60 whitespace-nowrap">
+            Правила отдыха и оферта
+          </button>
+          <button id="legal-tab-btn-cookies" onclick="switchLegalTab('cookies')" class="px-3.5 py-1.5 rounded-xl font-medium text-xs transition bg-timber-800 text-timber-400 hover:text-white border border-timber-700/60 whitespace-nowrap">
+            Политика файлов Cookie
+          </button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="overflow-y-auto pr-2 space-y-4 text-xs sm:text-[13px] leading-relaxed text-timber-300">
+          
+          <!-- TAB 1: 152-ФЗ -->
+          <div id="legal-tab-content-privacy" class="space-y-4">
+            <div class="p-3.5 rounded-xl bg-timber-950/70 border border-amberfire-500/20 text-amberfire-300 text-[11px]">
+              Настоящая Политика определяет порядок обработки и защиты персональных данных гостей банного комплекса «Банный двор» (ИП Колесников А. В., ОГРНИП 318619600045123, г. Азов, ул. Дружбы, 19В) в строгом соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ.
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">1. Общие положения и оператор данных</h4>
+              <p>1.1. Оператором персональных данных является ИП Колесников А. В. Обработка персональных данных осуществляется с соблюдением принципов законности, конфиденциальности и строгого целевого использования.</p>
+              <p class="mt-1">1.2. Оставляя заявку на расчет отдыха, бронируя парную, чан или беседку, пользователь выражает полное и безоговорочное согласие на обработку его данных в соответствии с настоящей Политикой.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">2. Объем и категории обрабатываемых данных</h4>
+              <p>2.1. В формах сайта собираются только данные, необходимые для бронирования времени отдыха:</p>
+              <ul class="list-disc list-inside mt-1 space-y-0.5 text-timber-400">
+                <li>Имя или обращение гостя;</li>
+                <li>Номер контактного телефона (мобильный);</li>
+                <li>Выбранные услуги (русская баня, сибирский чан, беседка с мангалом, количество гостей и желаемая дата/время);</li>
+                <li>Технические обезличенные сведения (IP-адрес, данные файлов cookie).</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">3. Цели сбора персональных данных</h4>
+              <p>3.1. Персональные данные обрабатываются строго в целях:</p>
+              <ul class="list-disc list-inside mt-1 space-y-0.5 text-timber-400">
+                <li>Расчета стоимости аренды парных, чанов и банкетных беседок;</li>
+                <li>Проверки свободного времени и фиксации бронирования за заказчиком;</li>
+                <li>Обратной связи администратора комплекса по телефону или через WhatsApp для подтверждения визита и пропуска на охраняемую парковку.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">4. Локализация баз данных в РФ (ч. 5 ст. 18 152-ФЗ)</h4>
+              <p>4.1. В полном соответствии с требованиями ч. 5 ст. 18 Федерального закона № 152-ФЗ сбор, хранение, накопление и обработка персональных данных граждан РФ производятся с использованием баз данных и вычислительных серверов, физически расположенных исключительно на территории Российской Федерации.</p>
+              <p class="mt-1">4.2. Передача персональных данных третьим лицам или рекламным сетям категорически исключена, за исключением случаев, установленных законодательством РФ.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">5. Сроки обработки и порядок отзыва согласия</h4>
+              <p>5.1. Данные хранятся до момента достижения целей бронирования либо до получения отзыва согласия от гостя.</p>
+              <p class="mt-1">5.2. Гость имеет право в любой момент отозвать свое согласие, обратившись по официальному телефону администрации комплекса: <span class="text-amberfire-400 font-bold">+7 (928) 766-26-67</span> либо лично по адресу: Ростовская область, г. Азов, ул. Дружбы, 19В. Срок уничтожения данных — до 10 рабочих дней.</p>
+            </div>
+          </div>
+
+          <!-- TAB 2: Правила отдыха и оферта -->
+          <div id="legal-tab-content-terms" class="hidden space-y-4">
+            <div class="p-3.5 rounded-xl bg-timber-950/70 border border-timber-700/60 text-timber-300 text-[11px]">
+              Настоящие Правила определяют порядок бронирования, пребывания и безопасности на территории банного комплекса «Банный двор» в Азове.
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">1. Статус информации и расчет калькулятора</h4>
+              <p>1.1. Любые предварительные расчеты на сайте носят ознакомительный характер и не являются публичной офертой по смыслу ст. 437 ГК РФ. Точная стоимость фиксируется администратором при подтверждении бронирования с учетом выбранного тарифа и времени суток.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">2. Бронирование и подготовка парных</h4>
+              <p>2.1. Баня на дровах и сибирский банный чан готовятся индивидуально к вашему визиту (прогрев печи на березовых дровах занимает до 3 часов). В связи с этим бронь фиксируется по предварительному согласованию с администратором.</p>
+              <p class="mt-1">2.2. Заказчик имеет право привозить свои продукты и напитки для приготовления шашлыка на мангале без дополнительных сборов за сервис.</p>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">3. Правила безопасности на территории</h4>
+              <p>3.1. В целях безопасности на всей территории комплекса действует строгий запрет на использование стеклянной посуды вблизи бассейнов, купелей и чанов.</p>
+              <p class="mt-1">3.2. Посещение термальной зоны и чана детьми разрешено строго в сопровождении взрослых.</p>
+            </div>
+          </div>
+
+          <!-- TAB 3: Cookie -->
+          <div id="legal-tab-content-cookies" class="hidden space-y-4">
+            <div class="p-3.5 rounded-xl bg-timber-950/70 border border-timber-700/60 text-timber-300 text-[11px]">
+              Настоящая Политика объясняет правила применения файлов cookie на сайте банного комплекса.
+            </div>
+
+            <div>
+              <h4 class="font-bold text-white text-sm mb-1">1. Использование файлов Cookie</h4>
+              <p>1.1. Мы используем технические файлы cookie для запоминания выбранных параметров отдыха в интерактивном квизе и фиксации согласия с правилами сайта в localStorage.</p>
+              <p class="mt-1">1.2. Аналитические счетчики используются исключительно для обезличенного подсчета посещаемости без сбора персональных сведений граждан.</p>
+              <p class="mt-1">1.3. Пользователь может отключить поддержку cookie в настройках своего браузера.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="pt-4 mt-3 border-t border-timber-800 flex items-center justify-between shrink-0">
+          <span class="text-[11px] text-timber-400">г. Азов, ул. Дружбы, 19В</span>
+          <button onclick="closePolicyModal()" class="px-6 py-2.5 rounded-xl bg-amberfire-600 hover:bg-amberfire-500 text-white font-bold text-xs transition shadow-card">
+            Понятно, закрыть
+          </button>
+        </div>
+
       </div>
     </div>
 
@@ -1713,13 +1819,38 @@
         lucide.createIcons();
       }
 
-      // Политика
-      function openPolicyModal() {
+      // Политика и правовой хаб (152-ФЗ)
+      function openPolicyModal(tab = 'privacy') {
         document.getElementById('policy-modal').classList.remove('hidden');
+        switchLegalTab(tab);
         lucide.createIcons();
       }
       function closePolicyModal() {
         document.getElementById('policy-modal').classList.add('hidden');
+      }
+      function switchLegalTab(tab) {
+        const tabs = ['privacy', 'terms', 'cookies'];
+        const titles = {
+          'privacy': 'Политика конфиденциальности (152-ФЗ)',
+          'terms': 'Правила отдыха и оферта комплекса',
+          'cookies': 'Политика использования файлов Cookie'
+        };
+        const titleEl = document.getElementById('legal-modal-title');
+        if (titleEl) titleEl.textContent = titles[tab] || 'Правовая информация';
+        
+        tabs.forEach(t => {
+          const btn = document.getElementById('legal-tab-btn-' + t);
+          const content = document.getElementById('legal-tab-content-' + t);
+          if (btn && content) {
+            if (t === tab) {
+              btn.className = 'px-3.5 py-1.5 rounded-xl font-bold text-xs transition bg-amberfire-600 text-white whitespace-nowrap';
+              content.classList.remove('hidden');
+            } else {
+              btn.className = 'px-3.5 py-1.5 rounded-xl font-medium text-xs transition bg-timber-800 text-timber-400 hover:text-white border border-timber-700/60 whitespace-nowrap';
+              content.classList.add('hidden');
+            }
+          }
+        });
       }
 
       // Cookie баннер
